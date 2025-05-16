@@ -5,6 +5,10 @@ import numpy as np
 from pandas.tseries.offsets import *
 from pandas.tseries.holiday import USFederalHolidayCalendar
 
+# IMPORTING FILES
+
+## Bear market historical classification
+
 bear_markets = pd.read_csv("../crisis_analysis/bear_markets.csv") # read file listing bear market periods in history
 bear_markets = bear_markets.drop(columns=['return_percentage','days_duration'])
 
@@ -14,6 +18,16 @@ type_mapping = {
 }
 
 bear_markets = bear_markets.astype(type_mapping) # ensure dtype is datetime
+
+## Operations from distance
+
+distance_operations = pd.read_csv("../distance_results/operations.csv").drop(columns=['Unnamed: 0'])
+
+## Operations from cointegrations
+
+########################################################
+
+# FUNCTIONS
 
 def create_daily_bear_market_indicator(bear_markets):
     '''
@@ -45,8 +59,6 @@ def create_daily_bear_market_indicator(bear_markets):
         
     return daily_df
 
-daily_bear_market = create_daily_bear_market_indicator(bear_markets) # Applying function to turn list of bear market periods to a complete list of dates classified
-
 def list_business_days(start_date, end_date):
     '''
     Create a list of business days between a date range, excludes US Federal Holidays
@@ -66,6 +78,11 @@ def list_business_days(start_date, end_date):
     date_range = pd.date_range(start=start_date, end=end_date, freq=us_bd)
     return [date.date() for date in date_range]
 
+
+# DATA MANIPULATION
+
+daily_bear_market = create_daily_bear_market_indicator(bear_markets) # Applying function to turn list of bear market periods to a complete list of dates classified
+
 start_date = '1990-01-01' # first date from dataset
 end_date = '2015-12-31' # last possible date from dataset
 business_days = pd.DataFrame(list_business_days(start_date, end_date), columns=['date']).astype({'date': 'datetime64[ns]'})
@@ -78,14 +95,17 @@ analysis_period_classified = pd.merge( # creates a new dataframe listing dates p
     how = 'inner'
 ).reset_index()
 
-operations = pd.read_csv("../distance_results/operations.csv").drop(columns=['Unnamed: 0'])
-
-operations = pd.merge(
-    left = operations,
+distance_operations = pd.merge(
+    left = distance_operations,
     right = analysis_period_classified,
     left_on = 'Count day',
     right_on = 'index',
     how = 'left'
 ).drop(columns=['index'])
 
-operations.to_csv(f"../distance_results/operations_crisis_classified.csv")
+
+# OUTPUTTING FILES
+
+distance_operations.to_csv(f"../distance_results/operations_crisis_classified.csv")
+
+cointegration_operations ########################################################
