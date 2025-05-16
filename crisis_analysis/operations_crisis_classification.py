@@ -105,6 +105,9 @@ distance_operations_classified = pd.merge(
 
 # OUTPUTTING FILES
 
+analysis_period_classified.to_csv(f"../distance_data/period_crisis_classification.csv")
+analysis_period_classified.to_csv(f"../cointegration_data/period_crisis_classification.csv")
+
 distance_operations.to_csv(f"../distance_results/operations_crisis_classified.csv")
 
 ######################################################## cointegration_operations
