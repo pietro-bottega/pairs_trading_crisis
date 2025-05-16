@@ -95,7 +95,7 @@ analysis_period_classified = pd.merge( # creates a new dataframe listing dates p
     how = 'inner'
 ).reset_index()
 
-distance_operations = pd.merge(
+distance_operations_classified = pd.merge(
     left = distance_operations,
     right = analysis_period_classified,
     left_on = 'Count day',
@@ -103,9 +103,8 @@ distance_operations = pd.merge(
     how = 'left'
 ).drop(columns=['index'])
 
-
 # OUTPUTTING FILES
 
 distance_operations.to_csv(f"../distance_results/operations_crisis_classified.csv")
 
-cointegration_operations ########################################################
+######################################################## cointegration_operations
