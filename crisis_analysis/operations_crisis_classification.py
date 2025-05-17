@@ -9,7 +9,7 @@ from pandas.tseries.holiday import USFederalHolidayCalendar
 
 ## Bear market historical classification
 
-bear_markets = pd.read_csv("../crisis_analysis/bear_markets.csv") # read file listing bear market periods in history
+bear_markets = pd.read_csv("bear_markets.csv") # read file listing bear market periods in history
 bear_markets = bear_markets.drop(columns=['return_percentage','days_duration'])
 
 type_mapping = {
@@ -25,7 +25,7 @@ distance_operations = pd.read_csv("../distance_results/operations.csv").drop(col
 
 ## Operations from cointegrations
 
-########################################################
+cointegration_operations = pd.read_csv("../cointegration_results/operations.csv")
 
 # FUNCTIONS
 
@@ -103,11 +103,18 @@ distance_operations_classified = pd.merge(
     how = 'left'
 ).drop(columns=['index'])
 
+cointegration_operations_classified = pd.merge(
+    left = cointegration_operations,
+    right = analysis_period_classified,
+    left_on = 'Abertura',
+    right_on = 'index',
+    how = 'left'
+).drop(columns=['index'])
+
 # OUTPUTTING FILES
 
 analysis_period_classified.to_csv(f"../distance_data/period_crisis_classification.csv")
 analysis_period_classified.to_csv(f"../cointegration_data/period_crisis_classification.csv")
 
-distance_operations.to_csv(f"../distance_results/operations_crisis_classified.csv")
-
-######################################################## cointegration_operations
+distance_operations_classified.to_csv(f"../distance_results/operations_crisis_classified.csv")
+cointegration_operations_classified.to_csv(f"../cointegration_results/operations_crisis_classified.csv")
