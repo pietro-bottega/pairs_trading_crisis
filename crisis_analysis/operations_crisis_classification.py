@@ -83,7 +83,7 @@ def list_business_days(start_date, end_date):
 
 daily_bear_market = create_daily_bear_market_indicator(bear_markets) # Applying function to turn list of bear market periods to a complete list of dates classified
 
-start_date = '1990-06-01' # first date from dataset
+start_date = '1991-06-01' # first date from dataset
 end_date = '2015-12-31' # last possible date from dataset
 business_days = pd.DataFrame(list_business_days(start_date, end_date), columns=['date']).astype({'date': 'datetime64[ns]'})
 

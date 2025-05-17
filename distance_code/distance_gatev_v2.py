@@ -27,7 +27,7 @@ percentage_costs = 0
 # set whether (0) or not (2) positive trading volume is required for opening/closing a pair
 trade_req = 0
 # Choose how much loss we are willing to accePt on a given pair, compared to 1, i.e, 0.93 = 7% stop loss
-Stop_loss = 0.95
+Stop_loss = 0.01
 
 if Stop_loss != float('-inf'):
     stop_dir = 100 - (Stop_loss * 100)
