@@ -1,6 +1,8 @@
 # Listing changes
 from original bkalil7/tcc
 
+`requirements.txt` has all libraries needed to run distance and cointegration codes
+
 ## Adding risk measurements (task 4)
 
 
@@ -29,8 +31,8 @@ operations.append({
 ### Directory `crisis_analysis/`
 
 Created directory
-Added `bear_markets.csv` file with periods of bear markets in histort, based on Hartford Funds reseach
-Added `crisis_analysis.ipynb` notebook to do data manipulation, later incorporated on `operations_crisis_classification.py`
+<br> Added `bear_markets.csv` file with periods of bear markets in histort, based on Hartford Funds reseach
+<br> Added `crisis_analysis.ipynb` notebook to do data manipulation, later incorporated on `operations_crisis_classification.py`
     
 `distance_code/operations_crisis_classification.py`
 - Added this .py script classifying operations from pairs trading into bear market period
