@@ -3,8 +3,13 @@ from original bkalil7/tcc
 
 `requirements.txt` has all libraries needed to run distance and cointegration codes
 
-## Adding risk measurements (task 4)
+## Measuring risk adjusted performance (task 4)
 
+Added `risk_adjusted_performance/` directory.
+`risk_adjusted_analysis.ipynb`: notebook with draft to calculate measeures and view dataframe with them calculated per semester
+`risk_adjusted_performance.py`: code to calculate risk adjusted measures based on results:
+- Outputs `distance_results/distance_risk_adjusted_measures.csv`
+- Outputs `cointegration_results/cointegration_risk_adjusted_measures.csv`
 
 
 ## Classify operations by subperiod crisis vs. non-crisis (task 5)
@@ -24,7 +29,7 @@ operations.append({
     "Pair": f"{pairs[p]['s1_ticker']}-{pairs[p]['s2_ticker']}",
     "Return": Rcum_ret[-1],
     "Converged": converged,
-    "Count day": counter
+    "Count day": counter # here is the line I added
     })
 ```
 
