@@ -6,8 +6,8 @@ from original bkalil7/tcc
 ## Measuring risk adjusted performance (task 4)
 
 Added `risk_adjusted_performance/` directory.
-`risk_adjusted_analysis.ipynb`: notebook with draft to calculate measeures and view dataframe with them calculated per semester
-`risk_adjusted_performance.py`: code to calculate risk adjusted measures based on results:
+<br>`risk_adjusted_analysis.ipynb`: notebook with draft to calculate measeures and view dataframe with them calculated per semester
+<br>`risk_adjusted_performance.py`: code to calculate risk adjusted measures based on results:
 - Outputs `distance_results/distance_risk_adjusted_measures.csv`
 - Outputs `cointegration_results/cointegration_risk_adjusted_measures.csv`
 
