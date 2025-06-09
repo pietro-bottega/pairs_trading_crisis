@@ -4,12 +4,16 @@ import pandas as pd
 import numpy as np
 from pandas.tseries.offsets import *
 from pandas.tseries.holiday import USFederalHolidayCalendar
+import seaborn as sns
+import matplotlib.pyplot as plt
+from matplotlib.ticker import PercentFormatter 
+
 
 # IMPORTING FILES
 
 ## Bear market historical classification
 
-bear_markets = pd.read_csv("bear_markets.csv") # read file listing bear market periods in history
+bear_markets = pd.read_csv("./bear_markets.csv") # read file listing bear market periods in history
 bear_markets = bear_markets.drop(columns=['return_percentage','days_duration'])
 
 type_mapping = {
@@ -25,7 +29,7 @@ distance_operations = pd.read_csv("../distance_results/operations.csv").drop(col
 
 ## Operations from cointegrations
 
-cointegration_operations = pd.read_csv("../cointegration_results/operations.csv")
+cointegration_operations = pd.read_csv("../cointegration_results/operations_SSD_ECM.csv")
 
 # FUNCTIONS
 
@@ -118,3 +122,36 @@ analysis_period_classified.to_csv(f"../cointegration_data/period_crisis_classifi
 
 distance_operations_classified.to_csv(f"../distance_results/operations_crisis_classified.csv")
 cointegration_operations_classified.to_csv(f"../cointegration_results/operations_crisis_classified.csv")
+
+# Comparison chart
+
+# Distance
+distance_operations_classified['excess_return'] = distance_operations_classified['Return'] - 1
+comparison_markets_distance = distance_operations_classified.groupby('is_bear_market')['excess_return'].agg(['mean', 'std']).reset_index()
+comparison_markets_distance['method'] = 'Distance'
+
+# Cointegration
+cointegration_operations_classified['excess_return'] = cointegration_operations_classified['Retorno total'] 
+comparison_markets_cointegration = cointegration_operations_classified.groupby('is_bear_market')['excess_return'].agg(['mean', 'std']).reset_index()
+comparison_markets_cointegration['method'] = 'Cointegration'
+
+comparison_markets = pd.concat([comparison_markets_distance, comparison_markets_cointegration])
+comparison_markets = comparison_markets.replace(0, 'Non-Crisis')
+comparison_markets = comparison_markets.replace(1, 'Crisis')
+
+# Create chart 
+
+sns.set_theme(style='darkgrid')
+fig, ax = plt.subplots(figsize=(8, 6))
+
+ax = sns.barplot(comparison_markets, x='is_bear_market', y='mean', hue='method')
+
+ax.set_title('Mean Excess Returns Crisis vs. Non-Crisis')
+ax.set_xlabel('Market period', labelpad=10)
+ax.set_ylabel('Mean Excess Returns (%)', labelpad=10)
+
+# Y axis as percentage
+ax.yaxis.set_major_formatter(PercentFormatter(1.00))
+
+fig = ax.get_figure()
+fig.savefig('./crisis_subperiods_comparison.png')
