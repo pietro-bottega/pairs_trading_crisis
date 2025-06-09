@@ -2,11 +2,11 @@
 
 `requirements.yml` has all libraries needed execute code.
 
-1. Using conda, run in CLI
+#### 1. Using conda, run in CLI
 ```console
 conda env create -f environment.yaml
 ```
-2. Run the distance method with:
+#### 2. Run the distance method with:
 ```console
 cd distance_code
 python distance_gatev_v2.py
@@ -14,7 +14,7 @@ cd ..
 ```
 <br> Main output at [operations.csv](https://github.com/pietro-bottega/pairs_trading_crisis/blob/master/distance_results/operations.csv)
 
-3. Run the cointegration method with:
+#### 3. Run the cointegration method with:
 ```console
 cd cointegration_code
 python cointegration_with_SSD_ECM.py
@@ -22,7 +22,7 @@ cd ..
 ```
 <br> Main output at [operations_SSD_ECM.csv](https://github.com/pietro-bottega/pairs_trading_crisis/blob/master/cointegration_results/operations_SSD_ECM.csv)
 
-3. Run calculations of return by subperiod (crisis vs. non-crisis):
+#### 4. Run calculations of return by subperiod (crisis vs. non-crisis):
 ```console
 cd crisis_analysis
 python operations_crisis_classification.py
@@ -30,14 +30,14 @@ cd ..
 ```
 <br> View results in [operations.csv](https://github.com/pietro-bottega/pairs_trading_crisis/tree/master/crisis_analysis/crisis_subperiods_comparison.png)
 
-4. Run calculations of risk adjusted performance:
+#### 4. Run calculations of risk adjusted performance:
 ```console
 cd risk_adjusted_performance
 python operations_crisis_classification.py
 cd ..
 ```
-View results in [cointegration_risk_adjusted_measures.csv](https://github.com/pietro-bottega/pairs_trading_crisis/blob/master/cointegration_results/cointegration_risk_adjusted_measures.csv)
-View results in [distance_risk_adjusted_measures.csv](https://github.com/pietro-bottega/pairs_trading_crisis/blob/master/distance_results/distance_risk_adjusted_measures.csv)
+<Br>View results in [cointegration_risk_adjusted_measures.csv](https://github.com/pietro-bottega/pairs_trading_crisis/blob/master/cointegration_results/cointegration_risk_adjusted_measures.csv)
+<br>View results in [distance_risk_adjusted_measures.csv](https://github.com/pietro-bottega/pairs_trading_crisis/blob/master/distance_results/distance_risk_adjusted_measures.csv)
 
 
 ## Listing changes

@@ -77,7 +77,7 @@ distance_metricas_por_semestre.to_csv(f"../distance_results/distance_risk_adjust
 ###################
 
 # Carregar os dados
-df = pd.read_csv("../cointegration_results/operations.csv")  
+df = pd.read_csv("../cointegration_results/operations_SSD_ECM.csv")  
 
 # Garantir tipos corretos
 df["Retorno total"] = pd.to_numeric(df["Retorno total"], errors="coerce")
