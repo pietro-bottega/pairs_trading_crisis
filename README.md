@@ -1,9 +1,58 @@
-# Listing changes
-from original bkalil7/tcc
+# Pairs trading
 
-`requirements.txt` has all libraries needed to run distance and cointegration codes
+`requirements.yml` has all libraries needed execute code.
 
-## Measuring risk adjusted performance (task 4)
+1. Using conda, run in CLI
+```console
+conda env create -f environment.yaml
+```
+2. Run the distance method with:
+```console
+cd distance_code
+python distance_gatev_v2.py
+cd ..
+```
+<br> Main output at [operations.csv](https://github.com/pietro-bottega/pairs_trading_crisis/blob/master/distance_results/operations.csv)
+
+3. Run the cointegration method with:
+```console
+cd cointegration_code
+python cointegration_with_SSD_ECM.py
+cd ..
+```
+<br> Main output at [operations_SSD_ECM.csv](https://github.com/pietro-bottega/pairs_trading_crisis/blob/master/cointegration_results/operations_SSD_ECM.csv)
+
+3. Run calculations of return by subperiod (crisis vs. non-crisis):
+```console
+cd crisis_analysis
+python operations_crisis_classification.py
+cd ..
+```
+<br> View results in [operations.csv](https://github.com/pietro-bottega/pairs_trading_crisis/tree/master/crisis_analysis/crisis_subperiods_comparison.png)
+
+4. Run calculations of risk adjusted performance:
+```console
+cd risk_adjusted_performance
+python operations_crisis_classification.py
+cd ..
+```
+View results in [cointegration_risk_adjusted_measures.csv](https://github.com/pietro-bottega/pairs_trading_crisis/blob/master/cointegration_results/cointegration_risk_adjusted_measures.csv)
+View results in [distance_risk_adjusted_measures.csv](https://github.com/pietro-bottega/pairs_trading_crisis/blob/master/distance_results/distance_risk_adjusted_measures.csv)
+
+
+## Listing changes
+from original [bkalil7/tcc](https://github.com/bkalil7/tcc/tree/main)
+
+### Performing ECM and SSD before cointegration (task 2)
+
+Added `cointegration_with_SSD_ECM.py`, incorporating ECM and SSD filters to select cointegrated pairs. It will output:
+1. `daily_returns_SSD_ECM.csv`
+2. `Rpair_SSD_ECM.csv`
+3. `operations_SSD_ECM.csv`
+<br>
+<br>Following steps were adjusted to take results from this cointegration method as input (mainly operations with SSD, ECM).
+
+### Measuring risk adjusted performance (task 4)
 
 Added `risk_adjusted_performance/` directory.
 <br>`risk_adjusted_analysis.ipynb`: notebook with draft to calculate measeures and view dataframe with them calculated per semester
@@ -12,7 +61,7 @@ Added `risk_adjusted_performance/` directory.
 - Outputs `cointegration_results/cointegration_risk_adjusted_measures.csv`
 
 
-## Classify operations by subperiod crisis vs. non-crisis (task 5)
+### Classify operations by subperiod crisis vs. non-crisis (task 5)
 
 `distance_gatev_v2.py`
 
@@ -33,7 +82,7 @@ operations.append({
     })
 ```
 
-### Directory `crisis_analysis/`
+#### Directory `crisis_analysis/`
 
 Created directory
 <br> Added `bear_markets.csv` file with periods of bear markets in histort, based on Hartford Funds reseach
